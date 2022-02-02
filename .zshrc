@@ -4,11 +4,12 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/daviddansby/.oh-my-zsh"
 
-export PATH="/Users/daviddansby/anaconda/bin:$PATH"
-
 # pyenv related
-export PATH="/Users/daviddansby/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+# export PATH="/Users/daviddansby/.pyenv/bin:$PATH"
+eval "$(pyenv init -)" 2>&1 >/dev/null
+eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
 # poetry related
@@ -90,7 +91,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize pip python brew osx zsh-syntax-highlighting poetry golang)
+plugins=(git colored-man-pages colorize pip python brew osx zsh-syntax-highlighting poetry golang zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -124,3 +125,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Created by `userpath` on 2020-06-10 07:20:18
 export PATH="$PATH:/Users/daviddansby/.local/bin"
+
+# gpg/signed commit stuff
+export GPG_TTY=$(tty)
