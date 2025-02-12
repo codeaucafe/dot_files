@@ -1,3 +1,15 @@
+# golang
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOPATH
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOBIN
+
+# brew
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="/opt/homebrew/sbin:$PATH"
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -11,28 +23,38 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)" 2>&1 >/dev/null
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
+export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+# For compilers to find readline you may need to set:
+export LDFLAGS="-L/usr/local/opt/readline/lib"
+export CPPFLAGS="-I/usr/local/opt/readline/include"
 
-# poetry related
-export PATH="$HOME/.poetry/bin:$PATH"
+# For openssl 1.1
+export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
+export DYLD_LIBRARY_PATH="/opt/homebrew/Cellar/openssl@1.1/lib:$DYLD_LIBRARY_PATH"
+
+
+# For pkg-config to find readline you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig"
+
+# pipx
+export PIP_REQUIRE_VIRTUALENV=true
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# golang
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH
-export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$GOBIN
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -97,7 +119,6 @@ plugins=(git colored-man-pages colorize pip python brew osx zsh-syntax-highlight
 source $ZSH/oh-my-zsh.sh
 
 
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -127,5 +148,10 @@ source $ZSH/oh-my-zsh.sh
 # Created by `userpath` on 2020-06-10 07:20:18
 export PATH="$PATH:/Users/daviddansby/.local/bin"
 
+export PATH="/usr/local/sbin:$PATH"
+
 # gpg/signed commit stuff
 export GPG_TTY=$(tty)
+
+bindkey '\x01' beginning-of-line
+bindkey '\x05' end-of-linesource
