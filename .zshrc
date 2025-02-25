@@ -46,7 +46,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="agnoster"
 
 # Plugins
-plugins=(git colored-man-pages colorize pip python brew osx zsh-syntax-highlighting poetry golang zsh-autosuggestions)
+plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting poetry golang zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
