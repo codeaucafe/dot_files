@@ -23,3 +23,5 @@ export PATH="/usr/local/sbin:$PATH"
 
 # GPG/Signed Commit Configuration
 export GPG_TTY=$(tty)
+
+export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
