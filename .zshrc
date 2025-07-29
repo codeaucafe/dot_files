@@ -1,15 +1,17 @@
 # --------------------------------------------------
 # POWERLEVEL10K INSTANT PROMPT (MUST BE FIRST)
 # --------------------------------------------------
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# commented out for now since testing starship
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # --------------------------------------------------
 # OH MY ZSH CONFIGURATION
 # --------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="" # leaving blank for for now since testing starship
 plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting poetry golang zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
@@ -18,6 +20,7 @@ source $ZSH/oh-my-zsh.sh
 # --------------------------------------------------
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="$HOME/Applications:$PATH"
 
 # --------------------------------------------------
 # SYSTEM LIBRARIES & DEPENDENCIES
@@ -38,7 +41,8 @@ bindkey '\x05' end-of-line        # Ctrl+E
 # --------------------------------------------------
 # THEME CONFIGURATION
 # --------------------------------------------------
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# commented out for now since testing starship
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # --------------------------------------------------
 # DEVELOPMENT ENVIRONMENTS (OUTPUT-PRODUCING)
@@ -69,8 +73,18 @@ fpath=(/Users/daviddansby/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 
+# kubectl completion (add this here)
+if command -v kubectl >/dev/null 2>&1; then
+    source <(kubectl completion zsh)
+fi
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/daviddansby/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/daviddansby/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc'; fi
+
+# --------------------------------------------------
+# STARSHIP PROMPT (MUST BE LAST)
+# --------------------------------------------------
+eval "$(starship init zsh)"

@@ -1,0 +1,148 @@
+# ~/.config/starship.toml
+# Final configuration matching your P10k setup exactly
+
+add_newline = false
+
+# Left side format - matches your P10k LEFT_PROMPT_ELEMENTS (dir + vcs)
+format = """\
+$directory\
+$git_branch\
+$git_status\
+$git_metrics\
+$character\
+"""
+
+# Right side format - matches your P10k RIGHT_PROMPT_ELEMENTS
+right_format = """\
+$status\
+$cmd_duration\
+$jobs\
+$python\
+$golang\
+$nodejs\
+$kubernetes\
+$aws\
+$gcloud\
+$time\
+"""
+
+# Directory configuration (matches P10k dir segment)
+[directory]
+style = "fg:231 bg:33 bold"
+format = "[$path]($style) "
+truncation_length = 8
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+read_only = "🔒"
+read_only_style = "fg:196"
+
+# Git branch (matches P10k vcs segment)
+[git_branch]
+symbol = ""
+style = "fg:0 bg:2"
+format = "[$symbol$branch]($style)"
+
+# Git status (matches P10k vcs segment)
+[git_status]
+style = "fg:0 bg:2"
+format = '([$all_status$ahead_behind]($style))'
+conflicted = "⚡"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = "✓"
+untracked = "?"
+stashed = "*"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# Git metrics (matches P10k vcs segment)
+[git_metrics]
+format = '([+$added]($added_style)/[-$deleted]($deleted_style) )'
+added_style = "fg:0 bg:2"
+deleted_style = "fg:0 bg:2"
+disabled = false
+
+# Character prompt (matches P10k prompt_char)
+[character]
+success_symbol = '[❯](76)'
+error_symbol = '[❯](196)'
+viowr_symbol = '[▶](76)'
+vicmd_symbol = '[❮](76)'
+vivis_symbol = '[V](76)'
+
+# Right side modules (matching your P10k RIGHT_PROMPT_ELEMENTS order)
+
+# Status (exit code)
+[status]
+format = '[$symbol$status]($style) '
+symbol = "✘"
+success_symbol = "✔"
+not_executable_symbol = "🚫"
+not_found_symbol = "🔍"
+sigint_symbol = "🧱"
+signal_symbol = "⚡"
+style = "fg:196"
+map_symbol = true
+disabled = false
+
+# Command execution time
+[cmd_duration]
+min_time = 3_000
+format = '[$duration]($style) '
+style = "fg:3 bg:0"
+
+# Background jobs
+[jobs]
+format = '[$symbol$number]($style) '
+symbol = "✦"
+style = "fg:6 bg:0"
+number_threshold = 1
+
+# Python environment
+[python]
+symbol = "🐍"
+format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
+style = "fg:0 bg:4"
+
+# Go version
+[golang]
+symbol = "🐹"
+format = '[$symbol($version)]($style) '
+style = "fg:255 bg:2"
+
+# Node.js version
+[nodejs]
+symbol = "⬢"
+format = '[$symbol($version)]($style) '
+style = "fg:7 bg:2"
+
+# Kubernetes context (matches your P10k kubecontext)
+[kubernetes]
+format = '[☸ $context($namespace)]($style) '
+style = "fg:7 bg:5"
+disabled = false
+detect_files = []
+detect_folders = []
+detect_extensions = []
+
+# AWS profile (matches your P10k aws)
+[aws]
+symbol = "🅰"
+format = '[$symbol($profile)($region)]($style) '
+style = "fg:7 bg:1"
+
+# Google Cloud (matches your P10k gcloud)
+[gcloud]
+symbol = "☁️"
+format = '[$symbol$account($project)]($style) '
+style = "fg:7 bg:4"
+
+# Time (matches your P10k time segment)
+[time]
+disabled = false
+format = '[$time]($style)'
+time_format = "%H:%M:%S"
+style = "fg:0 bg:7"
