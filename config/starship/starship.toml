@@ -56,7 +56,7 @@ Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
 [username]
-show_always = true
+show_always = false
 style_user = "bg:red fg:crust"
 style_root = "bg:red fg:crust"
 format = '[ $user]($style)'
@@ -66,6 +66,7 @@ style = "bg:peach fg:crust"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+fish_style_pwd_dir_length = 1
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -78,6 +79,8 @@ truncation_symbol = "…/"
 symbol = ""
 style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
+truncation_length = 32
+truncation_symbol = "…"
 
 [git_status]
 style = "bg:yellow"

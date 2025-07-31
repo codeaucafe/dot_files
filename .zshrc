@@ -88,3 +88,4 @@ if [ -f '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc' ]; then . '/Use
 # STARSHIP PROMPT (MUST BE LAST)
 # --------------------------------------------------
 eval "$(starship init zsh)"
+# eval "$(oh-my-posh init zsh)"

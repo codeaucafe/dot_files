@@ -1,0 +1,262 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 2,
+  "final_space": true,
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#ffffff",
+          "background": "#0087ff",
+          "template": " {{ .Path }} ",
+          "properties": {
+            "style": "agnoster_short",
+            "home_icon": "~",
+            "folder_icon": "",
+            "folder_separator_icon": "/",
+            "max_depth": 1
+          }
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#000000",
+          "background": "#00d700",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffff00{{ end }}"
+          ],
+          "template": " {{ if gt (len .HEAD) 32 }}{{ substr 0 12 .HEAD }}…{{ substr (sub (len .HEAD) 12) (len .HEAD) .HEAD }}{{ else }}{{ .HEAD }}{{ end }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} !{{ .Working.String }}{{ end }}{{ if .Staging.Changed }} +{{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} *{{ .StashCount }}{{ end }} ",
+          "properties": {
+            "fetch_status": true,
+            "fetch_stash_count": true,
+            "branch_icon": ""
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "status",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#00ff00",
+          "background": "#000000",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#ffff00{{ end }}"
+          ],
+          "background_templates": [
+            "{{ if gt .Code 0 }}#ff0000{{ end }}"
+          ],
+          "template": " {{ if gt .Code 0 }}✘ {{ .Code }}{{ else }}✔{{ end }} ",
+          "properties": {
+            "always_enabled": true
+          }
+        },
+        {
+          "type": "executiontime",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#ffff00",
+          "template": " {{ .FormattedMs }} ",
+          "properties": {
+            "threshold": 3000,
+            "style": "round"
+          }
+        },
+        {
+          "type": "background_jobs",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#00ffff",
+          "background": "#000000",
+          "template": " ✦ "
+        },
+        {
+          "type": "direnv",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ffff00",
+          "background": "#000000",
+          "template": " direnv "
+        },
+        {
+          "type": "python",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#0087ff",
+          "template": " {{ if .Venv }}{{ .Venv }}{{ else }}{{ .Full }}{{ end }} "
+        },
+        {
+          "type": "go",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#0087ff",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#00ff00",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "ruby",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#ff0000",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "rust",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#ff8700",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "java",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ff0000",
+          "background": "#ffffff",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "dotnet",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ffffff",
+          "background": "#ff00ff",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "php",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#ff00ff",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "terraform",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#0087ff",
+          "background": "#000000",
+          "template": " {{ .WorkspaceName }} "
+        },
+        {
+          "type": "kubectl",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ffffff",
+          "background": "#ff00ff",
+          "template": " ☸ {{ .Context }}{{ if .Namespace }} ({{ .Namespace }}){{ end }} "
+        },
+        {
+          "type": "aws",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ffffff",
+          "background": "#ff0000",
+          "template": " {{ .Profile }}{{ if .Region }} {{ .Region }}{{ end }} "
+        },
+        {
+          "type": "azure",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ffffff",
+          "background": "#0087ff",
+          "template": " {{ .Name }} "
+        },
+        {
+          "type": "gcp",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b2",
+          "foreground": "#ffffff",
+          "background": "#0087ff",
+          "template": " {{ .Project }} "
+        },
+        {
+          "type": "time",
+          "style": "diamond",
+          "trailing_diamond": "",
+          "leading_diamond": "\ue0b2",
+          "foreground": "#000000",
+          "background": "#ffffff",
+          "template": " {{ .CurrentDate | date .Format }} ",
+          "properties": {
+            "time_format": "15:04:05"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#00ff00",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#ff0000{{ end }}"
+          ],
+          "template": "❯"
+        }
+      ]
+    }
+  ],
+  "tooltips": [
+    {
+      "type": "aws",
+      "tips": ["aws", "awless", "cdk", "terraform", "pulumi", "terragrunt"],
+      "style": "plain",
+      "foreground": "#ffffff",
+      "background": "#ff0000",
+      "template": " AWS: {{ .Profile }}{{ if .Region }} {{ .Region }}{{ end }} "
+    },
+    {
+      "type": "kubectl",
+      "tips": ["kubectl", "helm", "kubens", "kubectx", "oc", "istioctl", "kogito", "k9s", "helmfile", "flux", "fluxctl", "stern", "kubeseal", "skaffold", "kubent", "kubecolor", "cmctl", "sparkctl"],
+      "style": "plain",
+      "foreground": "#ffffff",
+      "background": "#ff00ff",
+      "template": " ☸ {{ .Context }}{{ if .Namespace }} ({{ .Namespace }}){{ end }} "
+    },
+    {
+      "type": "azure",
+      "tips": ["az", "terraform", "pulumi", "terragrunt"],
+      "style": "plain",
+      "foreground": "#ffffff",
+      "background": "#0087ff",
+      "template": " Azure: {{ .Name }} "
+    },
+    {
+      "type": "gcp",
+      "tips": ["gcloud", "gcs", "gsutil"],
+      "style": "plain",
+      "foreground": "#ffffff",
+      "background": "#0087ff",
+      "template": " GCP: {{ .Project }} "
+    }
+  ]
+}
