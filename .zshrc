@@ -81,7 +81,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Docker completions
-fpath=(/Users/daviddansby/.docker/completions $fpath)
+if [ -d "$HOME/.docker/completions" ]; then
+    fpath=($HOME/.docker/completions $fpath)
+fi
 autoload -Uz compinit
 compinit
 
@@ -90,14 +92,17 @@ if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion zsh)
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/daviddansby/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/daviddansby/google-cloud-sdk/path.zsh.inc'; fi
+# Google Cloud SDK
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
+    . "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
+    . "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
 
 # --------------------------------------------------
-# STARSHIP and Oh-My-Post PROMPT (MUST BE LAST)
+# STARSHIP and Oh-My-Posh PROMPT (MUST BE LAST)
 # --------------------------------------------------
 # eval "$(starship init zsh)"
 # eval "$(oh-my-posh init zsh)"
