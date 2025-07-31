@@ -1,17 +1,27 @@
 # --------------------------------------------------
 # POWERLEVEL10K INSTANT PROMPT (MUST BE FIRST)
 # --------------------------------------------------
-# commented out for now since testing starship
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+# Only load P10k instant prompt if NOT in JetBrains terminal
+if [[ -z "$TERMINAL_EMULATOR" || "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+fi
 
 # --------------------------------------------------
 # OH MY ZSH CONFIGURATION
 # --------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_THEME="" # leaving blank for for now since testing starship
+
+# Detect if we're in a JetBrains terminal
+if [[ -n "$TERMINAL_EMULATOR" && "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+    # Use simple Robbyrussell theme in JetBrains
+    ZSH_THEME="robbyrussell"
+else
+    # Use Powerlevel10k everywhere else
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
+
 plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting poetry golang zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
@@ -41,8 +51,10 @@ bindkey '\x05' end-of-line        # Ctrl+E
 # --------------------------------------------------
 # THEME CONFIGURATION
 # --------------------------------------------------
-# commented out for now since testing starship
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Only load P10k config if NOT in JetBrains terminal
+if [[ -z "$TERMINAL_EMULATOR" || "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # --------------------------------------------------
 # DEVELOPMENT ENVIRONMENTS (OUTPUT-PRODUCING)
@@ -85,7 +97,7 @@ if [ -f '/Users/daviddansby/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dav
 if [ -f '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/daviddansby/google-cloud-sdk/completion.zsh.inc'; fi
 
 # --------------------------------------------------
-# STARSHIP PROMPT (MUST BE LAST)
+# STARSHIP and Oh-My-Post PROMPT (MUST BE LAST)
 # --------------------------------------------------
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 # eval "$(oh-my-posh init zsh)"
