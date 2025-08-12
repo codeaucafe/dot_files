@@ -71,6 +71,32 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Docker completions
-fpath=(/Users/daviddansby/.docker/completions $fpath)
+if [ -d "$HOME/.docker/completions" ]; then
+    fpath=($HOME/.docker/completions $fpath)
+fi
+
+# kubectl completion
+if command -v kubectl >/dev/null 2>&1; then
+    source <(kubectl completion zsh)
+fi
+
+# Google Cloud SDK
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
+    . "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
+    . "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
+# Initialize completions
 autoload -Uz compinit
 compinit
+
+# bun completions
+[ -s "/Users/ddansby_bestow/.bun/_bun" ] && source "/Users/ddansby_bestow/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
