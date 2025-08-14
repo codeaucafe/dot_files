@@ -1,15 +1,27 @@
 # --------------------------------------------------
 # POWERLEVEL10K INSTANT PROMPT (MUST BE FIRST)
 # --------------------------------------------------
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Only load P10k instant prompt if NOT in JetBrains terminal
+if [[ -z "$TERMINAL_EMULATOR" || "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
 fi
 
 # --------------------------------------------------
 # OH MY ZSH CONFIGURATION
 # --------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Detect if we're in a JetBrains terminal
+if [[ -n "$TERMINAL_EMULATOR" && "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
+    # Use simple Robbyrussell theme in JetBrains
+    ZSH_THEME="robbyrussell"
+else
+    # Use Powerlevel10k everywhere else
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
+
 plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting poetry golang zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
@@ -24,6 +36,7 @@ fi
 # --------------------------------------------------
 export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="$HOME/Applications:$PATH"
 
 # --------------------------------------------------
 # SYSTEM LIBRARIES & DEPENDENCIES
@@ -44,7 +57,10 @@ bindkey '\x05' end-of-line        # Ctrl+E
 # --------------------------------------------------
 # THEME CONFIGURATION
 # --------------------------------------------------
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Only load P10k config if NOT in JetBrains terminal
+if [[ -z "$TERMINAL_EMULATOR" || "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # --------------------------------------------------
 # DEVELOPMENT ENVIRONMENTS (OUTPUT-PRODUCING)
