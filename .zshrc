@@ -26,6 +26,7 @@ plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlig
 source $ZSH/oh-my-zsh.sh
 
 # Override prompt AFTER Oh My Zsh loads, only for JetBrains
+# Make prompt start on new line
 if [[ -n "$TERMINAL_EMULATOR" && "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]; then
     PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) %{$fg[cyan]%}%c%{$reset_color%} \$(git_prompt_info)
 %(?:%{$fg_bold[green]%}❯ :%{$fg_bold[red]%}❯ )%{$reset_color%}"
