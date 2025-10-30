@@ -113,6 +113,11 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
 fi
 
 # --------------------------------------------------
+# ALIASES
+# --------------------------------------------------
+alias claude="/Users/daviddansby/.claude/local/claude"
+
+# --------------------------------------------------
 # STARSHIP and Oh-My-Posh PROMPT (MUST BE LAST)
 # --------------------------------------------------
 # eval "$(starship init zsh)"
