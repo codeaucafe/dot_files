@@ -43,6 +43,7 @@ export PATH="$HOME/Applications:$PATH"
 # SYSTEM LIBRARIES & DEPENDENCIES
 # --------------------------------------------------
 export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl@3/lib -L/opt/homebrew/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@3/include -I/opt/homebrew/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/usr/local/opt/readline/lib/pkgconfig"
