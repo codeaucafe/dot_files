@@ -117,6 +117,7 @@ fi
 # ALIASES
 # --------------------------------------------------
 alias claude="/Users/daviddansby/.claude/local/claude"
+alias dolt-dev="$HOME/go/bin/dolt"
 
 # --------------------------------------------------
 # STARSHIP and Oh-My-Posh PROMPT (MUST BE LAST)
