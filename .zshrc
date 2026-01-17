@@ -116,7 +116,7 @@ fi
 # --------------------------------------------------
 # ALIASES
 # --------------------------------------------------
-alias claude="/Users/daviddansby/.claude/local/claude"
+alias claude="$HOME/.claude/local/claude"
 alias dolt-dev="$HOME/go/bin/dolt"
 
 # --------------------------------------------------
