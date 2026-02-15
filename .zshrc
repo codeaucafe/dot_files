@@ -76,12 +76,13 @@ eval "$(pyenv virtualenv-init -)"
 
 # pipx
 export PIP_REQUIRE_VIRTUALENV=true
+gpip() {
+    PIP_REQUIRE_VIRTUALENV=false pip "$@"
+}
 
 # Golang
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
 export GOBIN=$GOPATH/bin
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 
 # nvm config (can produce output, so placed late)
 export NVM_DIR="$HOME/.nvm"
@@ -123,3 +124,5 @@ alias dolt-dev="$HOME/go/bin/dolt"
 # --------------------------------------------------
 # eval "$(starship init zsh)"
 # eval "$(oh-my-posh init zsh)"
+
+eval "$($HOME/.local/bin/mise activate zsh)"
