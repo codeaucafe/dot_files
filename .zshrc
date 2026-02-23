@@ -83,6 +83,7 @@ gpip() {
 # Golang
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export PATH="$GOBIN:$PATH"
 
 # nvm config (can produce output, so placed late)
 export NVM_DIR="$HOME/.nvm"
