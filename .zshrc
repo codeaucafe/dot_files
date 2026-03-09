@@ -50,6 +50,11 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/usr/local/o
 export DYLD_LIBRARY_PATH="/opt/homebrew/Cellar/openssl@1.1/lib:$DYLD_LIBRARY_PATH"
 
 # --------------------------------------------------
+# LOCAL SECRETS (not tracked in git)
+# --------------------------------------------------
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
+
+# --------------------------------------------------
 # SHELL BEHAVIOR & KEYBINDINGS
 # --------------------------------------------------
 export GPG_TTY=$(tty)
