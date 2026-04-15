@@ -1,5 +1,8 @@
 font-family = "MesloLGS Nerd Font Mono"
 font-size = 13
-scrollback-limit = 100000
-keybind = shift+enter=text:\x1b\r
+scrollback-limit = 100000000
 confirm-close-surface = false
+shell-integration = none
+
+# keybindings
+keybind = shift+enter=text:\x1b\r
