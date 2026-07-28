@@ -22,7 +22,8 @@ else
     ZSH_THEME="powerlevel10k/powerlevel10k"
 fi
 
-plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting poetry golang zsh-autosuggestions)
+plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting
+    poetry golang zsh-autosuggestions grepai)
 source $ZSH/oh-my-zsh.sh
 
 # Override prompt AFTER Oh My Zsh loads, only for JetBrains
@@ -109,6 +110,11 @@ compinit
 # kubectl completion (add this here)
 if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion zsh)
+fi
+
+# grepai completion
+if command -v grepai >/dev/null 2>&1; then
+    eval "$(grepai completion zsh)"
 fi
 
 # Google Cloud SDK
