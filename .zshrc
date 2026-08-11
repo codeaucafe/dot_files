@@ -22,7 +22,8 @@ else
     ZSH_THEME="powerlevel10k/powerlevel10k"
 fi
 
-plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting poetry golang zsh-autosuggestions)
+plugins=(git colored-man-pages colorize pip python brew macos zsh-syntax-highlighting
+    poetry golang zsh-autosuggestions grepai)
 source $ZSH/oh-my-zsh.sh
 
 # Override prompt AFTER Oh My Zsh loads, only for JetBrains
@@ -43,10 +44,16 @@ export PATH="$HOME/Applications:$PATH"
 # SYSTEM LIBRARIES & DEPENDENCIES
 # --------------------------------------------------
 export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl@3/lib -L/opt/homebrew/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@3/include -I/opt/homebrew/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/usr/local/opt/readline/lib/pkgconfig"
 export DYLD_LIBRARY_PATH="/opt/homebrew/Cellar/openssl@1.1/lib:$DYLD_LIBRARY_PATH"
+
+# --------------------------------------------------
+# LOCAL SECRETS (not tracked in git)
+# --------------------------------------------------
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
 
 # --------------------------------------------------
 # SHELL BEHAVIOR & KEYBINDINGS
@@ -75,12 +82,14 @@ eval "$(pyenv virtualenv-init -)"
 
 # pipx
 export PIP_REQUIRE_VIRTUALENV=true
+gpip() {
+    PIP_REQUIRE_VIRTUALENV=false pip "$@"
+}
 
 # Golang
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
 export GOBIN=$GOPATH/bin
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+export PATH="$GOBIN:$PATH"
 
 # nvm config (can produce output, so placed late)
 export NVM_DIR="$HOME/.nvm"
@@ -95,10 +104,17 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 if [ -d "$HOME/.docker/completions" ]; then
     fpath=($HOME/.docker/completions $fpath)
 fi
+autoload -Uz compinit
+compinit
 
-# kubectl completion
+# kubectl completion (add this here)
 if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion zsh)
+fi
+
+# grepai completion
+if command -v grepai >/dev/null 2>&1; then
+    eval "$(grepai completion zsh)"
 fi
 
 # Google Cloud SDK
@@ -110,14 +126,15 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
     . "$HOME/google-cloud-sdk/completion.zsh.inc"
 fi
 
-# Initialize completions
-autoload -Uz compinit
-compinit
+# --------------------------------------------------
+# ALIASES
+# --------------------------------------------------
+alias dolt-dev="$HOME/go/bin/dolt"
 
-# bun completions
-[ -s "/Users/ddansby_bestow/.bun/_bun" ] && source "/Users/ddansby_bestow/.bun/_bun"
+# --------------------------------------------------
+# STARSHIP and Oh-My-Posh PROMPT (MUST BE LAST)
+# --------------------------------------------------
+# eval "$(starship init zsh)"
+# eval "$(oh-my-posh init zsh)"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
+eval "$($HOME/.local/bin/mise activate zsh)"

@@ -24,6 +24,9 @@ export CPPFLAGS="-I/usr/local/opt/openssl@3/include -I/opt/homebrew/opt/openssl@
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/usr/local/opt/readline/lib/pkgconfig"
 export DYLD_LIBRARY_PATH="/opt/homebrew/Cellar/openssl@1.1/lib:$DYLD_LIBRARY_PATH"
 
+# PSQL
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -31,6 +34,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # pipx
 export PIP_REQUIRE_VIRTUALENV=true
+gpip() {
+    PIP_REQUIRE_VIRTUALENV=false pip "$@"
+}
 
 # System Paths
 export PATH="/usr/local/sbin:$PATH"
