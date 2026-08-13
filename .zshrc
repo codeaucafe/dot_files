@@ -117,6 +117,10 @@ if command -v grepai >/dev/null 2>&1; then
     eval "$(grepai completion zsh)"
 fi
 
+# terraform completion (bash-style, so bashcompinit must load first)
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
 # Google Cloud SDK
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
     . "$HOME/google-cloud-sdk/path.zsh.inc"

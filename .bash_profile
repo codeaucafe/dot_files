@@ -25,3 +25,5 @@ export PATH="/usr/local/sbin:$PATH"
 export GPG_TTY=$(tty)
 
 export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+
+complete -C /opt/homebrew/bin/terraform terraform
