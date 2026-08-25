@@ -3,6 +3,7 @@ font-size = 13
 scrollback-limit = 100000000
 confirm-close-surface = false
 shell-integration = none
+macos-option-as-alt = true
 
 # keybindings
 keybind = shift+enter=text:\x1b\r
