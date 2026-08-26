@@ -7,3 +7,5 @@ macos-option-as-alt = true
 
 # keybindings
 keybind = shift+enter=text:\x1b\r
+keybind = alt+left=text:\x1b[1;3D
+keybind = alt+right=text:\x1b[1;3C
